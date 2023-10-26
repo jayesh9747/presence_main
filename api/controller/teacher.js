@@ -24,6 +24,10 @@ async function GetInfoByID(req, res) {
 
 
 const updateStudentAttendance = async (studentIds) => {
+    const attendanceObject = {
+        date: Date.now(),
+        status : "A"
+    }
   const updatePromises = studentIds.map(async (studentId) => {
     try {
       // Find the student by ID
@@ -34,12 +38,12 @@ const updateStudentAttendance = async (studentIds) => {
       }
 
       // Check if "attendanceHistory" field exists; if not, create it
-      if (!student.attendanceHistory) {
-        student.attendanceHistory = [];
+      if (!student.AttendanceHistory) {
+        student.AttendanceHistory = [];
       }
 
       // Push the attendance object into the "attendanceHistory" array
-      student.attendanceHistory.push(attendanceObject);
+      student.AttendanceHistory.push(attendanceObject);
 
       // Save the updated student document
       await student.save();
@@ -86,7 +90,8 @@ async function CreatenewSubclass(req,res){
 
         const allstudents = currentclass.JoinedBy;
 
-        updateStudentAttendance(allstudents)
+        updateStudentAttendance(allstudents);
+        
 
 
         

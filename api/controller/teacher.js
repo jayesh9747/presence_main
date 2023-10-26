@@ -1,5 +1,6 @@
 const TEACHER = require('../models/teachers');
 const CLASS = require('../models/classes');
+const Student = require("../models/students")
 
 // fetch data by Tid as teacher
 async function GetInfoByID(req, res) {
@@ -20,6 +21,46 @@ async function GetInfoByID(req, res) {
         res.json({ Error: error });
     }
 }
+
+
+const updateStudentAttendance = async (studentIds) => {
+  const updatePromises = studentIds.map(async (studentId) => {
+    try {
+      // Find the student by ID
+      const student = await Student.findById(studentId);
+
+      if (!student) {
+        throw new Error(`Student not found for ID: ${studentId}`);
+      }
+
+      // Check if "attendanceHistory" field exists; if not, create it
+      if (!student.attendanceHistory) {
+        student.attendanceHistory = [];
+      }
+
+      // Push the attendance object into the "attendanceHistory" array
+      student.attendanceHistory.push(attendanceObject);
+
+      // Save the updated student document
+      await student.save();
+
+      return { status: 'fulfilled', value: student };
+    } catch (error) {
+      return { status: 'rejected', reason: error.message };
+    }
+  });
+
+  const results = await Promise.allSettled(updatePromises);
+  results.forEach((result) => {
+    if (result.status === 'fulfilled') {
+      console.log(`Successfully updated student: ${result.value.name}`);
+    } else {
+      console.error(`Failed to update student: ${result.reason}`);
+    }
+  });
+    
+    
+};
 
 async function CreatenewSubclass(req,res){
     const CID = req.body.cid;
@@ -44,6 +85,8 @@ async function CreatenewSubclass(req,res){
         })
 
         const allstudents = currentclass.JoinedBy;
+
+        updateStudentAttendance(allstudents)
 
 
         

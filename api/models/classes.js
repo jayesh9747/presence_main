@@ -36,7 +36,12 @@ const Classesschema = new mongoose.Schema({
     },
     MISRange: {
         type: Number,
-    }
+    },
+    subclasses:[{
+        date:{
+            type: mongoose.Schema.Types.Date,
+        }
+    }]
 }, {
     timestamps: true,
 })

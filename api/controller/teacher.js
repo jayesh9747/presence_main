@@ -1,4 +1,5 @@
 const TEACHER = require('../models/teachers');
+const CLASS = require('../models/classes');
 
 // fetch data by Tid as teacher
 async function GetInfoByID(req, res) {
@@ -20,8 +21,42 @@ async function GetInfoByID(req, res) {
     }
 }
 
+async function CreatenewSubclass(req,res){
+    const CID = req.body.cid;
+    const TID = req.body.tid;
+    try {
+    
+        let result = await CLASS.findOneAndUpdate(
+            {
+                CID: CID,
+            },
+            {
+                $push: {
+                    Esubclasses: {
+                        date: Date.now(),
+                    },
+                },
+            }
+        );
+            
+        const currentclass =  await CLASS.findOne({
+            CID: CID,
+        })
+
+        const allstudents = currentclass.JoinedBy;
+
+
+        
+
+        
+    } catch (error) {
+        res.json({ Error: error });
+    }
+}
+
 
 
 module.exports = {
     GetInfoByID,
+    CreatenewSubclass
 }

@@ -42,6 +42,7 @@ build/Release
 /node_modules/
 /api/node_modules
 /client/node_modules
+/sagarpre/node_modules
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)

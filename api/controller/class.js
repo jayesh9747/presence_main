@@ -4,7 +4,8 @@ const TEACHER = require('../models/teachers');
 
 // create class by teacher 
 async function CreatenewClass(req, res) {
-    const { Name, Subject, Section } = req.body;
+    const { Name, Subject, Section } = req.body.body;
+    console.log(req.body);
     try {
         if (!Name && !Subject && !Section) return res.status(400).json({ error: "Fill all the required Information" });
         const ShortID = nanoid(8);
@@ -25,7 +26,9 @@ async function CreatenewClass(req, res) {
                 },
             }
         );
-        return res.send(classBody)
+        console.log(classBody);
+        console.log(updateteacher);
+        return res.json({msg:'created new class'});
     } catch (error) {
         res.json({ Error: error });
     }
@@ -55,18 +58,20 @@ async function GetClassByCID(req, res) {
 //fetch all classes which created by teacher 
 
 async function Getallclasses(req, res) {
-    console.log("i am in backend of getAllClaases")
-    const ID = req.user._id;
+    console.log(req.user);
+    const ID = "653b087d56d8daff4cb3398e" || req.user._id; 
+
     console.log(ID);
+
     try {
         const classCode = await CLASS.find({
             IssuedBy: ID
         }
         )
-        console.log(classCode,"i am classCode");
         return res.json(
-            classCode
+            {class:classCode}
         );
+
     } catch (error) {
         console.log(error);
         res.json({ Error: error });

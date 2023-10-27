@@ -50,14 +50,6 @@ function Login() {
             }
         }
         if(AllComplete){
-          // const res = await fetch(`http://localhost:5000/signin`, {
-          //   method : "POST",
-          //   body : JSON.stringify(loginFields),
-          //   headers : {
-          //     'Content-Type': 'application/json',
-          //   }
-          // })
-              console.log(loginFields,"i am lofinFielda on frontend ")
           const response = await axios.post("http://localhost:5000/signin", 
           {
             data: {
@@ -69,12 +61,15 @@ function Login() {
             { withCredentials: true},
            
             )
-
-            console.log(response.headers['set-cookie']);
           if(response){
             console.log(response);
             console.log(response.headers,"i am response headers");
+            if(loginFields.Role==="TEACHER"){
             navigat('/StudentPage');
+            }
+            else if(loginFields.Role==="STUDENT"){
+            navigat('/StudentPageII');
+            }
           }
           console.log(response);
         console.log(loginFields);

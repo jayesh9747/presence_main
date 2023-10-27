@@ -2,17 +2,20 @@ const { checkUserToken } = require("../services/userAuthentication");
 
 function checkForAuthenticationCookie(cookieName) {
     return (req, res, next) => {
-        console.log("i am in middleware")
+
+        console.log(req.cookies);
         const tokencookievalue = req.cookies[cookieName];
-        console.log(tokencookievalue,"i am cookie")
     
         if (!tokencookievalue) {
+            // console.log(tokencookievalue);
             return next();
         }
+
         try {
             const userPayload = checkUserToken(tokencookievalue);
 
-            console.log(userPayload,"i am payload")
+            console.log(userPayload,"i am payload");
+
             req.user = userPayload;
 
         } catch (error) {

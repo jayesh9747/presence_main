@@ -11,15 +11,14 @@ import { useContext } from 'react';
 import { AppContext } from '../AppContext';
 function StudentPage(){
    const [classes,setClasses]=useState([]);
-   const {teacherClasses,setTeacherClasses}=useContext(AppContext);
+   const {studentClasses,setStudentClasses,teacherClasses,setTeacherClasses}=useContext(AppContext);
    async function getdatafromApi(){
       try{
          console.log('i am  in try blovk')
-         const response = await axios.get("http://localhost:5000/teacher/class/cl");
+         const response = await axios.get("http://localhost:5000/student/class/cl");
         console.log("api called");
         console.log(response, ' ia m calss respne ');
-        setClasses(response.data.class);
-      setTeacherClasses(response.data.class);
+        setClasses(response.data.classes);
       }
       catch(e){
          console.log(e);
@@ -33,26 +32,21 @@ function StudentPage(){
              <div className="navBar">
                    <div className="logo"><img src="logo.png" className="logoImage"></img></div>
                    <div className="right">
-                      <NavLink to="/StudentPage/profile"> <div className="profile"><img src="profile.png" className="profilePhoto"></img></div></NavLink>
-                      <NavLink to="/StudentPage/createclass"><div className="joinClass">+</div></NavLink> 
+                      <NavLink to="/StudentPageII/profile"> <div className="profile"><img src="profile.png" className="profilePhoto"></img></div></NavLink>
+                      <NavLink to="/StudentPageII/joinclass"><div className="joinClass">+</div></NavLink> 
                    </div>
              </div>
              <div className="cards">
+               {console.log(classes)}
                {console.log(teacherClasses)}
-               {teacherClasses.map(element=>{
+               {classes.map(element=>{
                   return(
-                     <NavLink to={`/studentPage/${element._id}`}>
+                     <NavLink to={``}>
                      <Card key={element._id} props={element}></Card>
                      </NavLink>
-                     // // <div>
-                     // {/* <Routes> */}
-                     // {/* <Route to={`/StudentPage/${element._id}`} element={<SubClasses subData={element.subclasses}/>}></Route> */}
-                     // {/* <Link to={`/StudentPage/${element._id}`}> */}
-                     // {/* </Link>   */}
-                     // {/* </Routes> */}
-                     // {/* </div>   */}
                   )
-               })}
+                })
+               }
                 
              </div>
         </div>

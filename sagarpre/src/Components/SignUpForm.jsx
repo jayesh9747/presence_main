@@ -49,7 +49,7 @@ export default function SingUpForm(){
     }
     return(
 
-        <div className="wrapper">
+        <div className="wrapper4">
             <form className="signUpForm">
 
             <div className='sections'>

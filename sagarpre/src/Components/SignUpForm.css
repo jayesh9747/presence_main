@@ -1,14 +1,28 @@
+.wrapper4{
+    width:100vw;
+    height:100vh;
+    background-color: #5256AD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.headingSignUp{
+    font-size: 30px;
+    color:#0795ED;
+}
+
 .signUpForm{
     width:400px;
+    margin:15px 0;
     padding:20px;
     display:flex;
     flex-direction: column;
     gap:25px;
     position: relative;
-    border-radius:15px;
-    border:2px solid #38B4EB;
-    box-shadow:0 0 10px #3bB3eb;
-    background-color:aliceblue;
+    border-radius:10px;
+    /* border:2px solid #38B4EB; */
+    box-shadow:0 0 10px #333;
+    background-color:white;
 }
 .signUpForm span{
     align-self:center;
@@ -18,8 +32,8 @@
 }
 .sections{
     display:flex;
-    align-items:center;
-     gap:30px;
+    flex-direction: column;
+     gap:8px;
 }
 .sections label{
     display: inline-block;
@@ -29,28 +43,34 @@
     color:#012839;
 }
 .sections input,select{
-    width:80%;
-    height:30px;
+    width:100%;
+    height:40px;
     padding-left:10px;
-    border-radius:5px;;
-    border:1px solid #38B4EB;
-    box-shadow:0 0 5px #3bB3eb;
+    border-radius:50px;;
+    border:1px solid #b0aeae5c;
+    background-color: #33333307;
+}
+.sections input:hover{
+    background-color: white;
+}
+select:hover{
+    background-color: white;
 }
 .submitButton{
-    width:60%;
+    width:48%;
     padding:10px 0 10px 0;
-    background-color:#38B4EB;
+    background: linear-gradient(45deg, #0074E6,#00A9F4);
     color:white;
     font-size:20px;
     border:0;
-    border-radius:10px;
+    border-radius:50px;
     font-weight:bold;
     align-self:center;
+    margin:2px;
 }
 .submitButton:hover{
-    background-color:rgba(56, 181, 235, 0.683);
-    color:black;
-    border:2px solid black;
+    background: linear-gradient(45deg, #0073e6dd,#00abf4dd);
+    cursor: pointer;
 }
 @media(max-width:640px){
     .sections{

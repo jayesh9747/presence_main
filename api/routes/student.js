@@ -21,9 +21,8 @@ route.post('/jc', JoinClassroom);
 //get all classroom list which we enrolled 
 route.get('/class/cl', GetEnrolledClassList);
 
-
 //mark attendence 
-route.get('/class/mkatt',Markattendance);
+route.post('/class/mkatt',Markattendance);
 
 
 

@@ -39,7 +39,7 @@ const Classesschema = new mongoose.Schema({
     },
     subclasses:[{
         date:{
-            type: mongoose.Schema.Types.Date,
+            type: Date,
         }
     }]
 }, {

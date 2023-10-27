@@ -22,41 +22,49 @@ async function GetInfoByID(req, res) {
     }
 }
 
-const updateStudentAttendance = async (studentIds, CID) => {
-    console.log(CID);
-    dt = "2023-10-27T00:55:37.980+00:00";
-    let attendanceObject = {
-        date: dt,
-        status: "A",
-        classid: CID,
-    }
+const updateStudentAttendance = async (studentIds, CID, date) => {
 
+    const isNull = false;
     studentIds.forEach(async (studentId) => {
+
+        // console.log(studentId);
         try {
 
             const student = await Student.findById(studentId);
+            
             if (!student) {
                 throw new Error(`Student not found for ID: ${studentId}`);
             }
 
-            const attand = await Student.findOneAndUpdate({
+            const attand = await Student.findByIdAndUpdate(
                 studentId
-            }, {
+            , {
                 $push: {
                     AttendanceHistory: {
-                        date: dt,
+                        date: date,
                         status: 'A',
                         classid: CID,
                     },
                 }
             })
+            
+            if(attand){
+                isNull=true;
+            }
+
         } catch (error) {
             console.log(error);
         }
 
-        return { status: 'fulfilled' };
-
     })
+
+    if(isNull){
+        return { status: 'fulfilled' };
+    }else{
+        return {Erroe : "try again!"}
+    }
+    
+    
 
     // const updatePromises = studentIds.map(async (studentId) => {
     //     try {
@@ -98,9 +106,10 @@ const updateStudentAttendance = async (studentIds, CID) => {
 
 
 
+// creating the new subclass in class
 async function CreatenewSubclass(req, res) {
     const CID = req.body.cid;
-    const date = "2023-10-27T00:55:37.980+00:00";
+    const date = req.body.date;
     try {
 
         let result = await CLASS.findOneAndUpdate(
@@ -120,11 +129,13 @@ async function CreatenewSubclass(req, res) {
             CID: CID,
         })
 
+        const currentClassId = currentclass._id;
+        
         const allstudents = currentclass.JoinedBy;
 
         // console.log(allstudents);
 
-        const resp = await updateStudentAttendance(allstudents, CID);
+        const resp = await updateStudentAttendance(allstudents,currentClassId,date);
 
         return res.json({
             msg: resp,

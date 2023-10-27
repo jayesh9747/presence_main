@@ -4,6 +4,10 @@ const AttendanceRecord = require("../models/students")
 const wifi = require('node-wifi');
 const find = require('local-devices');
 
+
+//create attendence report
+//method : post
+// @route: teacher/class/viewrecord
 async function CreateAttendenceReport(req, res) {
     const date = Date.now();
     const TID = req.body.tid;
@@ -17,13 +21,12 @@ async function CreateAttendenceReport(req, res) {
         const allstudents = currentclass.JoinedBy;
 
     } catch (error) {
-
-    }
-
+        res.json({Error: error});
+    }.00
 }
 
 
-// mark attendece 
+// mark attendece for student
 
 async function Markattendance(req, res) {
 
@@ -138,8 +141,12 @@ const MarkattendeceofStudent = async (macaddress,CID,studentarray) => {
 }
 
 
+// take attendence by teacher 
+// method:Post
+// @route:teacher/class/tkatt
 async function Takeattendance(req, res) {
     const CID = req.body.cid;
+    const date = req.body.date;
     try {
         const globaldDevices = [];
 
@@ -151,7 +158,8 @@ async function Takeattendance(req, res) {
 
         const cls = await CLASS.findOne({
             CID:CID
-        })
+        });
+
         const studentarray = cls.JoinedBy;
 
         MarkattendeceofStudent(globaldDevices,CID,studentarray);
@@ -163,8 +171,9 @@ async function Takeattendance(req, res) {
 }
 
 
-//showing the attendence report
-
+// showing the attendence report
+// method:Post
+// @route : teacher/class/viewrecord
 async function ShowAttendenceReport(req,res) {
     const date = req.body.date;
     const TID =  req.body.TID;

@@ -64,6 +64,7 @@ async function JoinClassroom(req, res) {
 
 //retrive all classes which student enrolled
 async function GetEnrolledClassList(req, res) {
+    console.log("i am in the backend of get cl ")
     const ID = req.user._id;
     try {
         if (!ID) throw new Error(`Invalid User`);

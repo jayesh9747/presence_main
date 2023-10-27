@@ -107,6 +107,8 @@ const updateStudentAttendance = async (studentIds, CID, date) => {
 
 
 // creating the new subclass in class
+// method: post
+// @routes:teacher/class/sb
 async function CreatenewSubclass(req, res) {
     const CID = req.body.cid;
     const date = req.body.date;

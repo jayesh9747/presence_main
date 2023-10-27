@@ -1,5 +1,6 @@
 const express = require('express');
 const route = express.Router();
+const {checkForAuthenticationCookie} = require("../middlewares/authentication")
 const {
     GetInfoByID,
     JoinClassroom,
@@ -19,7 +20,7 @@ route.get('/', GetInfoByID);
 route.post('/jc', JoinClassroom);
 
 //get all classroom list which we enrolled 
-route.get('/class/cl', GetEnrolledClassList);
+route.get('/class/cl',GetEnrolledClassList);
 
 //mark attendence 
 route.post('/class/mkatt',Markattendance);

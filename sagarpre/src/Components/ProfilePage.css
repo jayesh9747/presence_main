@@ -1,5 +1,5 @@
-.profile{
-    width:100vw;
+.profilePP{
+    width:100%;
     height:100vh;
     display: flex;
     justify-content: center;
@@ -7,12 +7,12 @@
     flex-direction: column;
 }
 .upperPart{
+    width:290px;
     padding:20px;
     background-color: rgb(74, 94, 204);
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
-    width:250px;
     margin-bottom:3px;
 }
 .image{
@@ -74,4 +74,12 @@
 }
 .val{
     font-weight:bold;
+}
+.profilePageEditButton{
+    width:50px;
+    border:0;
+    padding:5px 0 5px 0;
+    border-radius:5px;
+    background-color:#07b0f831;
+    color:white;
 }

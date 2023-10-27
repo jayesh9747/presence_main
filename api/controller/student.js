@@ -4,7 +4,7 @@ const CLASS = require("../models/classes");
 // fetch data by id(mis) as student
 const GetInfoByID = async (req, res) => {
     try {
-        const ID = req.user._id;
+        const ID = req.user._id || "653b0772a422b30be97bf49b";
         const student = await STUDENT.findById(ID);
         res.status(200).json(student);
     } catch (error) {
@@ -14,8 +14,10 @@ const GetInfoByID = async (req, res) => {
 
 //Join the classroom by its id
 async function JoinClassroom(req, res) {
-    const { CID } = req.body;
-    const ID = req.user._id;
+    console.log(req.body);
+    const { CID } = req.body.data ;
+    console.log(CID);
+    const ID = req.user._id || "653b0772a422b30be97bf49b";
     try {
         if (!CID && !ID) throw new Error(`Invalid Parameter`);
 
@@ -64,8 +66,8 @@ async function JoinClassroom(req, res) {
 
 //retrive all classes which student enrolled
 async function GetEnrolledClassList(req, res) {
-    console.log("i am in the backend of get cl ")
-    const ID = req.user._id;
+    // console.log("i am in the backend of get cl ")
+    const ID =  "653b0772a422b30be97bf49b" || req.user._id ;
     try {
         if (!ID) throw new Error(`Invalid User`);
         const Student = await STUDENT.findOne({
@@ -84,6 +86,7 @@ async function GetEnrolledClassList(req, res) {
             classes: resp,
         });
     } catch (error) {
+        console.log(error)
         return res.json({
             Error: error.massage,
         });

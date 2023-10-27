@@ -17,7 +17,7 @@ const {
     CreateAttendenceReport
 } = require('../controller/attendence')
 
-const {checkForAuthenticationCookie} = require("../middlewares/authentication")
+const {checkForAuthenticationCookie} = require("../middlewares/authentication");
 
 
 
@@ -25,7 +25,8 @@ const {checkForAuthenticationCookie} = require("../middlewares/authentication")
 route.get('/:Tid', GetInfoByID);
 
 //get all classes which was created by teacherUID 
-route.get('/class/cl',checkForAuthenticationCookie ,Getallclasses);
+// route.get('/class/cl',checkForAuthenticationCookie ,Getallclasses);
+route.get('/class/cl',Getallclasses);
 
 //get single class whitch uniqueID
 route.get('/class/:CID', GetClassByCID);

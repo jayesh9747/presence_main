@@ -1,7 +1,10 @@
 import './StudentSubjectDetail.css';
 import './StudentPage.css';
 import MarkAttendance from './MarkAttendance';
-function StudentSubjectDetail(){
+import StuPastRecord from './StuPastRecord';
+import {useState} from 'react';
+export default function StudentSubjectDetail(){
+  const [activeTab,setActiveTab]=useState("markAttendence");
      return(
         <div className="wrapper3">
                <div className='subjectDetail'>
@@ -20,17 +23,17 @@ function StudentSubjectDetail(){
                    </div>
 
                    <div className='middlePartStuSubDet'>
-                       <div className='pastRecord'>View Past Record</div>
-                       <div className='markAttendance'>Mark Attendance</div>
+                       <div className='pastRecord' onClick={()=>{setActiveTab("pastRecord")}}>View Past Record</div>
+                       <div className='markAttendance' onClick={()=>{setActiveTab("markAttendence")}}>Mark Attendance</div>
                    </div>
                    <div className='lowerPartStuSubDet'>
-                        <MarkAttendance></MarkAttendance>
+                        {(activeTab==="markAttendence"?(<MarkAttendance/>):"")}
+                        {(activeTab==="pastRecord"?( <StuPastRecord/>):"")}
+                       
                    </div>
 
 
                </div>
         </div>
      )
-}
-
-export default StudentSubjectDetail;
+};

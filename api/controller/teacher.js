@@ -4,7 +4,7 @@ const Student = require("../models/students")
 
 // fetch data by Tid as teacher
 async function GetInfoByID(req, res) {
-    const Tid = req.params.Tid;
+    const Tid = "112215171" || req.params.Tid;
     try {
         if (!Tid) throw new Error(`invalid parameter`);
 

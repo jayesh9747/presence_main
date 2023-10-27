@@ -1,14 +1,15 @@
 import './CreateClassForm.css';
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 function ClassForm(){
     //use naviage hook
     const navigate=useNavigate();
     //class fileds
     const [classFileds,setClassFileds]=useState({
-        AcademicYear:"",
+        Name:"",
         Section:"",
-        Branch:"CSE",
+        // Branch:"CSE",
         Subject:""
     })
     function changeHandler(event){
@@ -21,7 +22,7 @@ function ClassForm(){
     }
     //submit data here 
     const [checkFileds,setCheckField]=useState(false);
-    function submitClassForm(event){
+    async function submitClassForm(event){
         event.preventDefault();
         var AllComplete=true;
         for(const key in classFileds){
@@ -32,39 +33,56 @@ function ClassForm(){
             }
         }
         if(AllComplete){
-        console.log(classFileds);
+            const response = await axios.post("http://localhost:5000/teacher/class/nc", 
+            {
+              body: {
+                Section :classFileds.Section,
+                Name: classFileds. Name,
+                Subject:classFileds.Subject
+              }
+              },
+              { withCredentials: true},
+             
+              )
+            if(response){
+              console.log(response);
+              console.log(response.headers,"i am response headers");
+            //   navigat('/StudentPage');
+            }
+
+            console.log(classFileds);
         }
     }
     return(
-        <form className='ClassForm'>
+        <div className='wrapper4 wrapper5'>
+        <form className='ClassForm signUpForm'>
             <div className='createClassHeading'>Create Class</div>
-            <div className='classFromSection'>
-                <label  htmlFor='AcademicYear'>Academic Year</label>
-                <input  type="text" name="AcademicYear" id="AcademicYear" placeholder="Enter Academic Year" onChange={changeHandler} required></input>
+            <div className='classFromSection sections'>
+                <label  htmlFor='Name'>Name</label>
+                <input  type="text" name="Name" id="Name" placeholder="Enter Class Name" onChange={changeHandler} required></input>
             </div>
-            <div className='classFromSection'>
+            <div className='classFromSection sections'>
                 <label  htmlFor='Section'>Section</label>
                 <input  type="text" name="Section" id="Section" placeholder="Enter Section" onChange={changeHandler} required></input>
             </div>
-            <div className='classFromSection'>
+            {/* <div className='classFromSection'>
                 <label  htmlFor='Branch'>Branch</label>
-                {/* <input  type="text" name="Branch" id="Branch" placeholder="Enter Branch" onChange={changeHandler} required></input> */}
                 <select name="Branch" id="Branch" onChange={changeHandler}>
                     <option value="CSE">CSE</option>
                     <option value="ECE">ECE</option>
                 </select>
-
-            </div>
-            <div className='classFromSection'>
+            </div> */}
+            <div className='classFromSection sections'>
                 <label  htmlFor='Subject'>Subject</label>
                 <input  type="text" name="Subject" id="Subject" placeholder="Enter Subject" onChange={changeHandler} required></input>
             </div>
             {checkFileds?(<span className='classFormIncompletemsg'>*** Please Complete All Fileds ***</span>):(" ")}
-            <div className='CreateClassButtonSection'>
-            <button onClick={()=>{navigate(-1)}}>Cancel</button>
-            <button onClick={submitClassForm}>Create</button>
+            <div className='CreateClassButtonSection sections'>
+            <button onClick={()=>{navigate(-1)}} className='submitButton'>Cancel</button>
+            <button onClick={submitClassForm} className='submitButton'>Create</button>
             </div>
         </form>
+        </div>
     )
 };
 export default ClassForm;

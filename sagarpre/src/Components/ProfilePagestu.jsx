@@ -2,7 +2,7 @@ import './ProfilePage.css';
 import React,{ useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-export default function ProfilePage(){
+export default function ProfilePageStu(){
     const [Name,setname]=useState("");
     const [Email,setEmail]=useState("");
     const [MisNo,setMIS]=useState("");
@@ -10,10 +10,11 @@ export default function ProfilePage(){
     const [Degree,setdegree]=useState("");
     const [AcademicYear,setAcademicYear]=useState("");
     const [Branch,setbranch]=useState("");
-    async function getinfoApi(){
+    async function getinfoAPI(){
+        console.log('khkhk')
         try{
-        const response = await axios.get("http://localhost:5000/teacher/:Tid");
-        console.log(response);
+        const response = await axios.get("http://localhost:5000/student/cl");
+        console.log("asdfgh",response);
         const obj=response.data.teacher; 
         setname(obj.Name);
         setEmail(obj.Email);
@@ -24,7 +25,7 @@ export default function ProfilePage(){
         }
         }
     useEffect(()=>{
-        getinfoApi();
+        getinfoAPI();
     },[]);
     return(
         <div className="profilePP">

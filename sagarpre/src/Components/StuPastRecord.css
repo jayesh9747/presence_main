@@ -89,6 +89,7 @@
 .absent{
     color:red;
 }
+
 /* filed form Teacher update fileds */
 .alpha{
     width:30px;
@@ -112,6 +113,7 @@
     font-weight:bold;
     color:black;
 }
+
 @media (max-width:640px){
     .studentPastRecordHeader{
         flex-direction:column;

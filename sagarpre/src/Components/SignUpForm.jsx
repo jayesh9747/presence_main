@@ -48,8 +48,10 @@ export default function SingUpForm(){
         }
     }
     return(
+
         <div className="wrapper">
             <form className="signUpForm">
+
             <div className='sections'>
                 <label htmlFor='Role'>Role</label>
                 <select name="Role" id="Role" value={signUpFields.Role} onChange={changeHandler}>
@@ -88,6 +90,8 @@ export default function SingUpForm(){
             
             
         </form>
+
         </div> 
+
     )
 }

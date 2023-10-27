@@ -1,6 +1,7 @@
 import { useState } from "react";
 export default function(){
     const [totalMarked,setTotalMarked]=useState("0");
+
     const [data,setData]=useState([
         {Misno:123,
         Name:"sagar",
@@ -16,6 +17,7 @@ export default function(){
         // setData(obj);
         console.log(obj);
     }
+
     return(
         <div className="TeacherUpdateRecord">
             <div className="teacherUpdateSub1">
@@ -36,6 +38,7 @@ export default function(){
                         <div>{element.Name}</div>
                         <div><span className="alpha" onClick={()=>{changeHandler("P",index)}}></span></div>
                         <div><span className="alpha" onClick={()=>{changeHandler("A",index)}}></span></div>
+
                         </div>
                     )
                  })

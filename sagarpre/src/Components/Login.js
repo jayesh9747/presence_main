@@ -1,7 +1,9 @@
 import './Login.css';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function Login() {
+  const navigat = useNavigate();
   const [loginFields,setLoginFileds]=useState({
     Role:"STUDENT",
     Email:"",
@@ -33,7 +35,7 @@ function Login() {
   }
   //submittinf forms details
   const [checkFileds,setCheckField]=useState(false);
-  function submitLoginFields(event){
+  async function submitLoginFields(event){
     event.preventDefault();
     var AllComplete=true;
         for(const key in loginFields){
@@ -44,6 +46,17 @@ function Login() {
             }
         }
         if(AllComplete){
+          const res = await fetch(`http://localhost:5000/signin`, {
+            method : "POST",
+            body : JSON.stringify(loginFields),
+            headers : {
+              'Content-Type': 'application/json'
+            }
+          })
+          if(res.ok){
+            alert("login successfully", res.msg);
+            navigat('/StudentPage');
+          }
         console.log(loginFields);
         }
   }

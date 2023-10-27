@@ -79,7 +79,9 @@ async function CreateUser(req, res) {
 
 //login user to the app
 async function SigninUser(req, res) {
-    const { Email, Password, Role } = req.body;
+    const { Email, Password, Role } = req.body.data;
+
+    console.log(Email,Password,Role);
 
     try {
 
@@ -88,6 +90,8 @@ async function SigninUser(req, res) {
         if (Role === 'TEACHER') {
             const token = await TEACHER.matchPasswordAndGenerateToken(Email, Password);
             if (!token) throw new Error(`Invalid Credantial`);
+            console.log(' i am teavher field')
+            console.log(token,"i am token")
             return res.cookie("token", token).json({
                 msg: 'susscessful login'
             });
@@ -96,13 +100,18 @@ async function SigninUser(req, res) {
         if (Role === 'STUDENT') {
             const token = await STUDENT.matchPasswordAndGenerateToken(Email, Password);
             if (!token) throw new Error(`Invalid Credantial`);
-            return res.cookie("token", token).json({
-                msg: 'susscessful login'
-            });
+            console.log(token,"i am token")
+
+        res.cookie("token", token);
+        return res.json({
+            msg: 'susscessful login'
+        })
+
         }
 
     } catch (error) {
-        return res.json({ Error: error });
+        console.log(error,"i am error")
+        return res.json({ Error: "Hello my name is error"});
     }
 }
 

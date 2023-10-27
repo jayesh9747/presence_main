@@ -13,8 +13,11 @@ const {
 } = require('../controller/teacher');
 
 const {
-    Takeattendance
+    Takeattendance,
+    CreateAttendenceReport
 } = require('../controller/attendence')
+
+const {checkForAuthenticationCookie} = require("../middlewares/authentication")
 
 
 
@@ -22,7 +25,7 @@ const {
 route.get('/:Tid', GetInfoByID);
 
 //get all classes which was created by teacherUID 
-route.get('/class/cl', Getallclasses);
+route.get('/class/cl',checkForAuthenticationCookie ,Getallclasses);
 
 //get single class whitch uniqueID
 route.get('/class/:CID', GetClassByCID);
@@ -36,5 +39,7 @@ route.post('/class/tkatt',Takeattendance);
 //create new subclasses
 route.post('/class/sb',CreatenewSubclass);
 
+//create particular class report
+route.get('/class/viewrecord',CreateAttendenceReport);
 
 module.exports = route;

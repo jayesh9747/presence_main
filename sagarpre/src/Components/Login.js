@@ -2,7 +2,11 @@ import './Login.css';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import cookie from "react-cookie";
+import Cookies from 'universal-cookie';
+import axios from "axios"
 function Login() {
+  // const cookies = new Cookies(null,{ path: '/' });
   const navigat = useNavigate();
   const [loginFields,setLoginFileds]=useState({
     Role:"STUDENT",
@@ -46,17 +50,33 @@ function Login() {
             }
         }
         if(AllComplete){
-          const res = await fetch(`http://localhost:5000/signin`, {
-            method : "POST",
-            body : JSON.stringify(loginFields),
-            headers : {
-              'Content-Type': 'application/json'
+          // const res = await fetch(`http://localhost:5000/signin`, {
+          //   method : "POST",
+          //   body : JSON.stringify(loginFields),
+          //   headers : {
+          //     'Content-Type': 'application/json',
+          //   }
+          // })
+              console.log(loginFields,"i am lofinFielda on frontend ")
+          const response = await axios.post("http://localhost:5000/signin", 
+          {
+            data: {
+               Email : loginFields.Email,
+               Password : loginFields.Password,
+               Role:loginFields.Role
             }
-          })
-          if(res.ok){
-            alert("login successfully", res.msg);
+            },
+            { withCredentials: true},
+           
+            )
+
+            console.log(response.headers['set-cookie']);
+          if(response){
+            console.log(response);
+            console.log(response.headers,"i am response headers");
             navigat('/StudentPage');
           }
+          console.log(response);
         console.log(loginFields);
         }
   }

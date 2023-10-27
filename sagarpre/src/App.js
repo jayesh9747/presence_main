@@ -5,7 +5,7 @@ import JoinClass from './Components/JoinClass';
 import {Routes,Route} from 'react-router-dom';
 import StuPastRecord from './Components/StuPastRecord';
 import TeacherUpdateRecord from './Components/TeacherUpdateRecord';
-
+import { CookiesProvider } from "react-cookie";
 import StudentPage from './Components/StudentPage';
 import Login from './Components/Login';
 

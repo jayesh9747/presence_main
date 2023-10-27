@@ -55,15 +55,16 @@ async function GetClassByCID(req, res) {
 //fetch all classes which created by teacher 
 
 async function Getallclasses(req, res) {
+    console.log("i am in backend of getAllClaases")
     const ID = req.user._id;
-    // console.log(ID);
+    console.log(ID);
     try {
         const classCode = await CLASS.find({
             IssuedBy: ID
         }
         )
-        // console.log(classCode);
-        return res.send(
+        console.log(classCode,"i am classCode");
+        return res.json(
             classCode
         );
     } catch (error) {

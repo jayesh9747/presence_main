@@ -4,13 +4,14 @@ require("dotenv").config({ path: "./config.env" });
 const express = require("express");
 const app = express();
 const cors = require("cors");
-app.use(cors());
+
 
 //mongodb connection imported
 const { connectMongoDB } = require("./connection");
 
 //middleware imported
 const bodyParser = require("body-parser");
+
 const cookieParser = require("cookie-parser");
 
 //Routers
@@ -29,6 +30,11 @@ connectMongoDB(process.env.MONGO_URI)
     });
 
 //authentication
+app.use(cors({
+    origin : "http://localhost:3000",
+    credentials: true,
+}));
+app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));

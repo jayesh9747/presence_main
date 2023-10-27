@@ -1,0 +1,65 @@
+.wrapper2{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+
+}
+.card{
+    width:300px;
+    height:300px;
+    margin:20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 5px #333;
+    position: relative;
+    cursor: pointer;
+    background-color: #F4E3D1;
+    
+}
+.upperPartCard{
+    height:100%;
+    width:70%;
+    background-color: #283A48;
+
+}
+.subject{
+    color:#F4DED0;
+    padding:10px 20px;
+    font-size: 40px;
+}
+.teacher{
+    color:#676C6D;
+    padding:10px 20px;
+    font-size: 17px;
+    font-weight: 500;
+    z-index: 100;
+    position: absolute;
+    right:0px;
+    top:120px;
+}
+.tilt{
+    width:120px;
+    height:400px;
+    background-color: #F4E3D1;
+    position: absolute;
+    transform: rotate(10deg);
+    top:0px;
+    right:20px;
+    
+    
+}
+.cardImage{
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    position: absolute;
+    right:10px;
+    top:50px;
+    z-index: 100;
+}
+.otherDetail{
+    color: #F4E3D1;
+    margin-top: 20px;
+    margin-left: 10px;
+}

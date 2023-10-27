@@ -1,10 +1,12 @@
 import './App.css';
-import Signup from './Components/Signup'
-
+import Login from '../../sagarpre/src/Components/Login'
+import {Routes,Route} from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-       <Signup></Signup>
+      <Routes>
+      <Route path="/" element={<Login/>}></Route>
+      </Routes>
     </div>
   );
 }

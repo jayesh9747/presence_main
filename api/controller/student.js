@@ -20,8 +20,12 @@ async function JoinClassroom(req, res) {
         if (!CID && !ID) throw new Error(`Invalid Parameter`);
 
         const user = await STUDENT.findById(ID);
+        const enrolledClasses = user.EnrolledClasses;
 
-        if (CID in user.EnrolledClasses) throw new Error(`YOu are `);
+
+        isenrolled = enrolledClasses.includes(CID)? true : false;
+
+        if (isenrolled) throw new Error(`YOu are already in this classroom`);
 
         let result = await STUDENT.findOneAndUpdate(
             {

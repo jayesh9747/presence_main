@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const AttendanceRecord = new mongoose.Schema({
     date: {
-        type: mongoose.Schema.Types.Date,
+        type: Date,
         required: true,
     },
     teacherId: {
@@ -22,7 +22,6 @@ const AttendanceRecord = new mongoose.Schema({
             status: {
                 type: String,
                 enum: ['P', 'A'],
-                default: 'A',
             }
         }
     ]

@@ -1,6 +1,7 @@
 const STUDENT = require('../models/students');
 const TEACHER = require('../models/teachers');
 const validator = require('validator');
+
 // create new user 
 async function CreateUser(req, res) {
     const { Name, Email, MAC, Password, MisNo, Role, TID } = req.body;
@@ -63,7 +64,7 @@ async function CreateUser(req, res) {
 
             //on completing the user signup
             return res.json({
-                msg: "user is created",
+                msg: `${Role} was created`,
                 user: User
             });
         }
@@ -75,7 +76,6 @@ async function CreateUser(req, res) {
     }
 
 }
-
 
 //login user to the app
 async function SigninUser(req, res) {

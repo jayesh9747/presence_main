@@ -18,7 +18,7 @@ const Classesschema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: "students",
     },
-    AcedamicYear: {
+    AcademicYear: {
         type: String,
     },
     Section: {
@@ -39,7 +39,7 @@ const Classesschema = new mongoose.Schema({
     },
     subclasses:[{
         date:{
-            type: mongoose.Schema.Types.Date,
+            type: Date,
         }
     }]
 }, {

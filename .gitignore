@@ -44,7 +44,7 @@ build/Release
 /client/node_modules
 /sagarpre/node_modules
 jspm_packages/
-
+*/sahilp/*
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 

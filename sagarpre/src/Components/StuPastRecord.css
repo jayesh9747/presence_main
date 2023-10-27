@@ -89,6 +89,31 @@
 .absent{
     color:red;
 }
+
+/* filed form Teacher update fileds */
+.alpha{
+    width:30px;
+    height:30px;
+    border-radius:2px;
+    border:1px solid black;
+}
+.teacherUpdateSub1{
+    padding:10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.teacherUpdateSub1 p{
+    font-size:30px;
+    font-weight:bold;
+    color:rgb(74, 94, 204);
+}
+.teacherUpdateSub1 span{
+    font-size:20px;
+    font-weight:bold;
+    color:black;
+}
+
 @media (max-width:640px){
     .studentPastRecordHeader{
         flex-direction:column;

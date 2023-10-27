@@ -1,0 +1,13 @@
+.attendanceMark{
+    width:300px;
+    height:60px;
+    border: 1px solid #002060;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3333335e;
+    color:white;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}

@@ -1,15 +1,18 @@
 import './SignUpForm.css';
 import {useState} from 'react';
 import { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 export default function SingUpForm(){
+    const navigat=useNavigate();
     const [signUpFields,setSignUpFileds]=useState({
         Name:"",
         Email:"",
         MAC:"",
         Password:"",
-        MisNo:"",
+        MisNo:"1",
         Role:"STUDENT",
-        TID:"",
+        TID:"1",
     });
     function changeHandler(event){
         setSignUpFileds(previous=>{
@@ -28,7 +31,8 @@ export default function SingUpForm(){
     //submit data here 
     const [checkFileds,setCheckField]=useState(false);
     function submitSignUp(event){
-        event.preventDefault();
+        console.log("enter inside");
+         event.preventDefault();
         var AllComplete=true;
         for(const key in signUpFields){
             if(signUpFields.Role==="STUDENT"&&key==="TID"){
@@ -44,6 +48,49 @@ export default function SingUpForm(){
             }
         }
         if(AllComplete){
+            async function submitLoginFields(){
+                console.log("aagya");
+                var AllComplete=true;
+                    for(const key in signUpFields){
+                        if(signUpFields[key]==""){
+                            setCheckField(true);
+                            AllComplete=false;
+                            setTimeout(()=>{setCheckField(false)},700);
+                        }
+                    }
+                    console.log('kjkhjkhjk');
+                    if(AllComplete){
+                        console.log('khkhnk');
+                      const response = await axios.post("http://localhost:5000/signup", 
+                      {
+                        data: {
+                           Name : signUpFields.Name,
+                           Email: signUpFields.Email,
+                           MAC: signUpFields.MAC,
+                           Password: signUpFields.Password,
+                           Role: signUpFields.Role,
+                           MisNo: signUpFields.MisNo,
+                           TID: signUpFields.TID
+                        }
+                        },
+                        { withCredentials: true},
+                        )
+                      if(response){
+                        console.log(response);
+                        console.log(response.headers,"i am response headers");
+                        if(signUpFields.Role==="TEACHER"){
+                        navigat('/StudentPage');
+                        }
+                        else if(signUpFields.Role==="STUDENT"){
+                        navigat('/StudentPageII');
+                        }
+                      }
+                      console.log(response);
+                    }
+              }
+            //   useEffect(()=>{
+               submitLoginFields();
+            //   },[]);
         console.log(signUpFields);
         }
     }

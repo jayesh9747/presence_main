@@ -18,7 +18,7 @@ const Classesschema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: "students",
     },
-    AcedamicYear: {
+    AcademicYear: {
         type: String,
     },
     Section: {

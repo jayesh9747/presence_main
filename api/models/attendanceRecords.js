@@ -22,7 +22,6 @@ const AttendanceRecord = new mongoose.Schema({
             status: {
                 type: String,
                 enum: ['P', 'A'],
-                default: 'A',
             }
         }
     ]

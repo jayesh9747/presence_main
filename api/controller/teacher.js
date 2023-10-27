@@ -22,82 +22,116 @@ async function GetInfoByID(req, res) {
     }
 }
 
-
-const updateStudentAttendance = async (studentIds) => {
-    const attendanceObject = {
-        date: Date.now(),
-        status : "A"
+const updateStudentAttendance = async (studentIds, CID) => {
+    console.log(CID);
+    dt = "2023-10-27T00:55:37.980+00:00";
+    let attendanceObject = {
+        date: dt,
+        status: "A",
+        classid: CID,
     }
-  const updatePromises = studentIds.map(async (studentId) => {
-    try {
-      // Find the student by ID
-      const student = await Student.findById(studentId);
 
-      if (!student) {
-        throw new Error(`Student not found for ID: ${studentId}`);
-      }
+    studentIds.forEach(async (studentId) => {
+        try {
 
-      // Check if "attendanceHistory" field exists; if not, create it
-      if (!student.AttendanceHistory) {
-        student.AttendanceHistory = [];
-      }
+            const student = await Student.findById(studentId);
+            if (!student) {
+                throw new Error(`Student not found for ID: ${studentId}`);
+            }
 
-      // Push the attendance object into the "attendanceHistory" array
-      student.AttendanceHistory.push(attendanceObject);
+            const attand = await Student.findOneAndUpdate({
+                studentId
+            }, {
+                $push: {
+                    AttendanceHistory: {
+                        date: dt,
+                        status: 'A',
+                        classid: CID,
+                    },
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
 
-      // Save the updated student document
-      await student.save();
+        return { status: 'fulfilled' };
 
-      return { status: 'fulfilled', value: student };
-    } catch (error) {
-      return { status: 'rejected', reason: error.message };
-    }
-  });
+    })
 
-  const results = await Promise.allSettled(updatePromises);
-  results.forEach((result) => {
-    if (result.status === 'fulfilled') {
-      console.log(`Successfully updated student: ${result.value.name}`);
-    } else {
-      console.error(`Failed to update student: ${result.reason}`);
-    }
-  });
-    
-    
+    // const updatePromises = studentIds.map(async (studentId) => {
+    //     try {
+    //         // Find the student by ID
+    //         const student = await Student.findById(studentId);
+
+    //         if (!student) {
+    //             throw new Error(`Student not found for ID: ${studentId}`);
+    //         }
+
+    //         // Check if "attendanceHistory" field exists; if not, create it
+    //         if (!student.AttendanceHistory) {
+    //             student.AttendanceHistory = [];
+    //         }
+
+    //         // Push the attendance object into the "attendanceHistory" array
+    //         student.AttendanceHistory.push(attendanceObject);
+
+    //         // Save the updated student document
+    //         await student.save();
+
+    //         return { status: 'fulfilled', value: student };
+    //     } catch (error) {
+    //         console.log(error);
+    //         return { status: 'rejected', reason: error.message };
+    // }
+    // });
+
+    // const results = await Promise.allSettled(updatePromises);
+    // results.forEach((result) => {
+    //     if (result.status === 'fulfilled') {
+    //         console.log(`Successfully updated student: ${result.value.name}`);
+    //     } else {
+    //         console.error(`Failed to update student: ${result.reason}`);
+    //     }
+    // });
+
 };
 
-async function CreatenewSubclass(req,res){
+
+
+async function CreatenewSubclass(req, res) {
     const CID = req.body.cid;
-    const TID = req.body.tid;
+    const date = "2023-10-27T00:55:37.980+00:00";
     try {
-    
+
         let result = await CLASS.findOneAndUpdate(
             {
                 CID: CID,
             },
             {
                 $push: {
-                    Esubclasses: {
-                        date: Date.now(),
+                    subclasses: {
+                        date: date,
                     },
                 },
             }
         );
-            
-        const currentclass =  await CLASS.findOne({
+
+        const currentclass = await CLASS.findOne({
             CID: CID,
         })
 
         const allstudents = currentclass.JoinedBy;
 
-        updateStudentAttendance(allstudents);
-        
+        // console.log(allstudents);
 
+        const resp = await updateStudentAttendance(allstudents, CID);
 
-        
+        return res.json({
+            msg: resp,
+        })
 
-        
     } catch (error) {
+        console.log(error);
         res.json({ Error: error });
     }
 }

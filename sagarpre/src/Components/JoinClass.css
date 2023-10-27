@@ -1,0 +1,97 @@
+.JoinClass{
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:30px;
+}
+.JoinClassNavBar{
+    width:100%;
+    border-bottom:2px solid rgb(74, 94, 204) ;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:10px;
+    padding-bottom:10px;
+    box-shadow: 0 3px 6px 0px rgb(74, 94, 204);
+}
+.JoinClassNavBar div{
+    display:flex;
+    align-items:center;
+    gap:50px;
+    font-size:30px;
+    color:rgb(74, 94, 204);
+    font-weight:bold;
+    margin-left:40px;
+}
+.JoinClassNavBar button{
+    margin-right:40px;
+    padding:6px 16px 6px 16px;
+    background-color:rgb(74, 94, 204);
+    border:0;
+    font-weight:bold;
+    font-size:15px;
+    color:white;
+    border-radius:5px;
+}
+.JoinClassNavBar button:hover{
+    background-color:rgba(74, 94, 204, 0.427) ;
+    color:black
+}
+.joinClassSub1{
+    width:40%;
+    border:2px solid rgb(74, 94, 204);
+    border-radius:5px;
+    padding:10px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+.joinClassSub1sub{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.joinClassSub1sub div p{
+    font-size:20px;
+    font-weight:bold;
+}
+.temp p{
+    font-size:25px;
+    font-weight:bold;
+}
+.temp input{
+    width:150px;
+    height:40px;
+    border:2px solid rgb(74, 94, 204);
+    border-radius:5px;
+    padding-left:10px;
+    font-size:20px;
+}
+.joinClassSub2{
+    width:40%;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+.joinClassSub2 span,ul{
+    color:rgb(128, 128, 128);
+    font-size:18px;
+}
+@media (max-width:640px){
+    .JoinClassNavBar div{
+        gap:10px;
+        margin-left:5px;
+    }
+    .JoinClassNavBar button{
+        margin-right:5px;
+    }
+    .joinClassSub1{
+        width:90%;
+    }
+    .joinClassSub2{
+        width:90%;
+    }
+
+}

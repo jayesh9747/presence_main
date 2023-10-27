@@ -1,5 +1,6 @@
 const { nanoid } = require("nanoid");
 const CLASS = require('../models/classes');
+const TEACHER = require('../models/teachers');
 
 // create class by teacher 
 async function CreatenewClass(req, res) {
@@ -14,6 +15,16 @@ async function CreatenewClass(req, res) {
             Subject: Subject,
             Section: Section,
         })
+        const updateteacher = await TEACHER.findOneAndUpdate(
+            {
+                _id: req.user._id,
+            },
+            {
+                $push: {
+                    CreatedClasses: classBody._id,
+                },
+            }
+        );
         return res.send(classBody)
     } catch (error) {
         res.json({ Error: error });

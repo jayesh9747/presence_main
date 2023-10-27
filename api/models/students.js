@@ -47,6 +47,7 @@ const studentschema = new mongoose.Schema({
     },
     MAC: {
         type: String,
+        unique:true,
         required: true,
     },
     EnrolledClasses: [{ type: 'String' }],
@@ -58,7 +59,13 @@ const studentschema = new mongoose.Schema({
     AttendanceHistory: [
         {
             date: Date,
-            status: String,
+            status: {
+                type: String,
+                enum:['P','A'],
+            },
+            classid :{
+                type : mongoose.Schema.Types.ObjectId,
+            }
         }
     ],
 }, {

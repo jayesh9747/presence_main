@@ -9,7 +9,13 @@ const {
 
 const {
     GetInfoByID,
+    CreatenewSubclass
 } = require('../controller/teacher');
+
+const {
+    Takeattendance
+} = require('../controller/attendence')
+
 
 
 // get teacher profiledata by id
@@ -24,9 +30,11 @@ route.get('/class/:CID', GetClassByCID);
 //create new classroom 
 route.post('/class/nc', CreatenewClass);
 
+//take attendance 
+route.post('/class/tkatt',Takeattendance);
 
-
-
+//create new subclasses
+route.post('/class/sb',CreatenewSubclass);
 
 
 module.exports = route;

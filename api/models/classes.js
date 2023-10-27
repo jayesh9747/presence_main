@@ -18,7 +18,7 @@ const Classesschema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: "students",
     },
-    AcedamicYear: {
+    AcademicYear: {
         type: String,
     },
     Section: {
@@ -36,7 +36,12 @@ const Classesschema = new mongoose.Schema({
     },
     MISRange: {
         type: Number,
-    }
+    },
+    subclasses:[{
+        date:{
+            type: Date,
+        }
+    }]
 }, {
     timestamps: true,
 })

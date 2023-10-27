@@ -6,6 +6,9 @@ const {
     GetEnrolledClassList
 } = require('../controller/student');
 
+const {
+    Markattendance
+} = require('../controller/attendence');
 
 
 // get student profiledata by id
@@ -17,6 +20,10 @@ route.post('/jc', JoinClassroom);
 
 //get all classroom list which we enrolled 
 route.get('/class/cl', GetEnrolledClassList);
+
+//mark attendence 
+route.post('/class/mkatt',Markattendance);
+
 
 
 module.exports = route;

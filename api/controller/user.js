@@ -4,6 +4,7 @@ const validator = require('validator');
 
 // create new user 
 async function CreateUser(req, res) {
+    console.log(req);
     const { Name, Email, MAC, Password, MisNo, Role, TID } = req.body;
 
     try {
